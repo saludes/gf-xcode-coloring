@@ -69,10 +69,10 @@
  },
         
     {
-   Identifier = "xcode.lang.lau.interestingOperators";
+   Identifier = "xcode.lang.gf.interestingOperators";
    Syntax = {
      Words = (
-         "..",
+         "++",
          ".",
                 ":",
          );
@@ -127,7 +127,7 @@
         "xcode.lang.character",
         "xcode.lang.gf.identifier",
                 "xcode.lang.number",
-        "xcode.lang.lau.interestingOperators",
+        "xcode.lang.gf.interestingOperators",
             );
   };
 },
