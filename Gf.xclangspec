@@ -1,0 +1,507 @@
+// gf
+//  gf.xclangspec v3.0.1
+
+//	gf language specification for Xcode 1.5. */
+//	Bret Victor, 4/24/2005
+
+//	Based on SubEthaEdit's gf mode, and the built-in Xcode language specs at:
+//	/System/Library/PrivateFrameworks/DevToolsCore.framework/Versions/A/Resources/Built-in languages.pblangspec
+
+//	Up dated to gf 5.1 syntax by Graham Henstridge, 24/10/2006 and confirmed
+//  operational with Xcode 2.4.
+
+//  Updated 1/12/07 to Xcode3 by Graham Henstridge, with a  little help from
+//  David Ewing at Apple     
+//  Uses the new .xclangspec format, the definition of which is not available,
+//  however using various files at:
+//  /Developer/Library/PrivateFrameworks/XcodeEdit.framework/Versions/A/Resources/
+//  assists in understanding the language.
+
+//  Place this file gf.xclangspec and gf.pbfilespec in directory:
+//  ~/Library/Application Support/Developer/Shared/Xcode/Specifications/
+
+(
+
+ /****************************************************************************/
+ // MARK: gf keywords
+ /****************************************************************************/
+ {
+ Identifier = "xcode.lang.gf.identifier";
+ Syntax = {
+ StartChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_[";
+ Chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_?[]";
+ Words = ("PType",
+  "Str",
+  "Strs", 
+  "Type",
+  "abstract",
+  "case",
+  "cat",
+  "concrete",
+  "data",
+  "def",
+  "flags",
+  "fun",
+  "in",
+  "incomplete",
+  "instance", 
+  "interface",
+  "let",
+  "lin",
+  "lincat",
+  "lindef",
+  "of",
+  "open",
+  "oper",
+  "param",
+  "pre",
+  "printname",
+  "resource",
+  "strs",
+  "table",
+  "transfer",
+  "variants",
+  "where",
+  "with");
+     Type = "xcode.syntax.keyword";
+ AltType = "xcode.syntax.identifier";    // non-keywords are identifiers
+ };
+ },
+        
+    {
+   Identifier = "xcode.lang.lau.interestingOperators";
+   Syntax = {
+     Words = (
+         "..",
+         ".",
+                ":",
+         );
+     Type = "xcode.syntax.plain";
+   };
+ },
+
+ 
+ 
+ /****************************************************************************/
+ // MARK: gf Syntax Coloring
+ /****************************************************************************/
+
+{
+  Identifier = "xcode.lang.gf";
+  Description = "gf Coloring";
+  BasedOn = "xcode.lang.simpleColoring";
+  IncludeInMenu = YES;
+  Name = "gf";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer.toplevel";
+    IncludeRules = (
+        "xcode.lang.gf.module",
+        "xcode.lang.gf.class",
+        "xcode.lang.gf.function",
+        "xcode.lang.gf.block",
+        "xcode.lang.gf.block.if",
+        "xcode.lang.gf.block.while",
+        "xcode.lang.gf.block.repeat",
+        "xcode.lang.gf.block.for",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+    Type = "xcode.syntax.plain";
+  };
+},
+  
+  // The following rule returns tokens to the other rules
+{
+  Identifier = "xcode.lang.gf.lexer";
+  Syntax = {
+    IncludeRules = (
+        "xcode.lang.gf.comment",
+        "xcode.lang.gf.comment.singleline",
+        "xcode.lang.string",
+        "xcode.lang.string.gf0",
+        "xcode.lang.string.gf1",
+        "xcode.lang.string.gf2",
+        "xcode.lang.string.gf3",
+        "xcode.lang.string.gf4",
+        "xcode.lang.string.gf5",
+        "xcode.lang.character",
+        "xcode.lang.gf.identifier",
+                "xcode.lang.number",
+        "xcode.lang.lau.interestingOperators",
+            );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.lexer.toplevel";
+  Syntax = {
+    IncludeRules = (
+        "xcode.lang.gf.comment",
+        "xcode.lang.gf.comment.singleline",
+        "xcode.lang.string",
+                "xcode.lang.string.gf0",
+        "xcode.lang.string.gf1",
+        "xcode.lang.string.gf2",
+        "xcode.lang.string.gf3",
+        "xcode.lang.string.gf4",
+        "xcode.lang.string.gf5",
+        "xcode.lang.character",
+        "xcode.lang.gf.module.declarator",
+        "xcode.lang.gf.class.declarator",
+        "xcode.lang.gf.function.declarator",
+        "xcode.lang.gf.identifier",
+        "xcode.lang.number",
+        );
+  };
+},
+  
+    {
+    Identifier = "xcode.lang.string.gf0";
+    Syntax = {
+      Start = "[[";
+      End = "]]";
+      Type = "xcode.syntax.string";
+    };
+  },
+
+{
+  Identifier = "xcode.lang.string.gf1";
+  Syntax = {
+    Start = "[=[";
+    End = "]=]";
+    Type = "xcode.syntax.string";
+  };
+},
+
+{
+  Identifier = "xcode.lang.string.gf2";
+  Syntax = {
+    Start = "[==[";
+    End = "]==]";
+    Type = "xcode.syntax.string";
+  };
+},
+
+{
+  Identifier = "xcode.lang.string.gf3";
+  Syntax = {
+    Start = "[===[";
+    End = "]===]";
+    Type = "xcode.syntax.string";
+  };
+},
+
+{
+  Identifier = "xcode.lang.string.gf4";
+  Syntax = {
+    Start = "[====[";
+    End = "]====]";
+    Type = "xcode.syntax.string";
+  };
+},
+
+{
+  Identifier = "xcode.lang.string.gf5";
+  Syntax = {
+    Start = "[=====[";
+    End = "]=====]";
+    Type = "xcode.syntax.string";
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.module";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer.toplevel";
+    Start = "xcode.lang.gf.module.declarator";
+    End = "end";
+    Foldable = YES;
+    Recursive = YES;
+    IncludeRules = (
+        "xcode.lang.gf.class",
+        "xcode.lang.gf.function",
+        );
+    Type = "xcode.syntax.definition.class";
+  };
+},
+  
+{
+  Identifier = "xcode.lang.gf.module.declarator";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Rules = (
+        "require",
+        "xcode.lang.gf.identifier",
+        );
+    Type = "xcode.syntax.name.partial";
+  };
+},
+  
+{
+  Identifier = "xcode.lang.gf.class";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer.toplevel";
+    Start = "xcode.lang.gf.class.declarator";
+    End = "end";
+    Foldable = YES;
+    Recursive = YES;
+    IncludeRules = (
+        "xcode.lang.gf.function",
+        );
+    Type = "xcode.syntax.definition.class";
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.class.declarator";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Rules = (
+        "class",
+        "xcode.lang.gf.identifier",
+        "xcode.lang.gf.superclass?"
+        );
+    Type = "xcode.syntax.name.partial";
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.superclass";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Rules = (
+        "->",
+        "xcode.lang.gf.identifier",
+        );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.function";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer.toplevel";
+    Start = "xcode.lang.gf.function.declarator";
+    End = "end";
+    Foldable = YES;
+    Recursive = YES;
+    IncludeRules = (
+        "xcode.lang.gf.block",
+        "xcode.lang.gf.block.if",
+        "xcode.lang.gf.block.while",
+        "xcode.lang.gf.block.repeat",
+        "xcode.lang.gf.block.for",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+    Type = "xcode.syntax.definition.function";
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.function.declarator";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Rules = (
+        "function",
+        "xcode.lang.gf.function.name",
+        );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.function.name";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Rules = (
+        "xcode.lang.gf.identifier",
+        "xcode.lang.gf.function.name.more?",
+        );
+    Type = "xcode.syntax.name.partial";
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.function.name.more";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Rules = (
+        ".",
+        "xcode.lang.gf.identifier",
+        );
+    Type = "xcode.syntax.name.partial";
+  };
+},
+
+
+/****************************************************************************/
+// MARK: gf blocks
+/****************************************************************************/
+{
+  Identifier = "xcode.lang.gf.block";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "{";
+    End = "}";
+    Foldable = YES;
+    Recursive = YES;
+    IncludeRules = (
+        "xcode.lang.gf.block.if",
+        "xcode.lang.gf.block.while",
+        "xcode.lang.gf.block.repeat",
+        "xcode.lang.gf.block.for",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.block.if";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "if";
+    End = "end";
+    Foldable = YES;
+    Recursive = YES;
+    StartAtBOL = YES;
+    IncludeRules = (
+        "xcode.lang.gf.block",
+        "xcode.lang.gf.block.while",
+        "xcode.lang.gf.block.repeat",
+        "xcode.lang.gf.block.for",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+  };
+},
+  
+{
+  Identifier = "xcode.lang.gf.block.while";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "while";
+    End = "end";
+    Foldable = YES;
+    Recursive = YES;
+    StartAtBOL = YES;
+    IncludeRules = (
+        "xcode.lang.gf.block",
+        "xcode.lang.gf.block.if",
+        "xcode.lang.gf.block.repeat",
+        "xcode.lang.gf.block.for",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.block.repeat";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "repeat";
+    End = "until";
+    Foldable = YES;
+    Recursive = YES;
+    StartAtBOL = YES;
+    IncludeRules = (
+        "xcode.lang.gf.block",
+        "xcode.lang.gf.block.if",
+        "xcode.lang.gf.block.while",
+        "xcode.lang.gf.block.for",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.block.for";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "for";
+    End = "end";
+    Foldable = YES;
+    Recursive = YES;
+    StartAtBOL = YES;
+    IncludeRules = (
+        "xcode.lang.gf.block",
+        "xcode.lang.gf.block.if",
+        "xcode.lang.gf.block.while",
+        "xcode.lang.gf.block.repeat",
+        "xcode.lang.gf.bracketexpr",
+        "xcode.lang.gf.parenexpr",
+        );
+  };
+},
+  
+{
+  Identifier = "xcode.lang.gf.parenexpr";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "(";
+    End = ")";
+    Recursive = YES;
+    IncludeRules = (
+        "xcode.lang.gf.bracketexpr",
+        );
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.bracketexpr";
+  Syntax = {
+    Tokenizer = "xcode.lang.gf.lexer";
+    Start = "[";
+    End = "]";
+    Recursive = YES;
+    IncludeRules = (
+        "xcode.lang.gf.parenexpr",
+        );
+  };
+},
+  
+{
+  Identifier = "xcode.lang.gf.comment";
+  Syntax = {
+    Start = "--[[";
+    End = "]]";
+    Foldable = YES;
+    IncludeRules = ( 
+                "xcode.lang.url", 
+                "xcode.lang.url.mail", 
+                "xcode.lang.comment.mark"
+            );
+    Type = "xcode.syntax.comment";
+  };
+},
+
+{
+  Identifier = "xcode.lang.gf.comment.singleline";
+  Syntax = {
+    Start = "--";
+    End = "\n";
+    IncludeRules = ( 
+                "xcode.lang.url", 
+                "xcode.lang.url.mail", 
+                "xcode.lang.comment.mark"
+            );
+    Type = "xcode.syntax.comment";
+  };
+},
+        {
+  Identifier = "xcode.lang.gf.comment1";
+  Syntax = {
+    Start = "--[=[";
+    End = "]=]";
+    Foldable = YES;
+    IncludeRules = ( 
+                "xcode.lang.url", 
+                "xcode.lang.url.mail", 
+                "xcode.lang.comment.mark"
+            );
+    Type = "xcode.syntax.comment";
+  };
+},
+
+)

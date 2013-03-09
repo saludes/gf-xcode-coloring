@@ -1,0 +1,15 @@
+/* 
+ * Gf.xcspec: Gf file type for Gf
+ * 
+ */
+
+(
+	{
+		Type = FileType;
+		Identifier = sourcecode.gf;
+		BasedOn = sourcecode;
+		Name = "Gf file";
+		Extensions = ( gf );
+		Language = "xcode.lang.gf";
+	}
+)
