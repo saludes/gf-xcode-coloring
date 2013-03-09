@@ -139,7 +139,7 @@
         "xcode.lang.gf.comment",
         "xcode.lang.gf.comment.singleline",
         "xcode.lang.string",
-                "xcode.lang.string.gf0",
+        "xcode.lang.string.gf0",
         "xcode.lang.string.gf1",
         "xcode.lang.string.gf2",
         "xcode.lang.string.gf3",
@@ -464,8 +464,8 @@
 {
   Identifier = "xcode.lang.gf.comment";
   Syntax = {
-    Start = "--[[";
-    End = "]]";
+    Start = "{-";
+    End = "-}";
     Foldable = YES;
     IncludeRules = ( 
                 "xcode.lang.url", 
@@ -489,11 +489,12 @@
     Type = "xcode.syntax.comment";
   };
 },
-        {
+
+       {
   Identifier = "xcode.lang.gf.comment1";
   Syntax = {
-    Start = "--[=[";
-    End = "]=]";
+    Start = "{-";
+    End = "-}";
     Foldable = YES;
     IncludeRules = ( 
                 "xcode.lang.url", 
