@@ -28,4 +28,11 @@ Based on the work on Lua by:
 
 3. From `Pygments` call `make mapfiles`.
 
+##Sublime Text
+Copy folder `Gf` into `Packages` in the __Sublime Text 2__ installation folder.
+
+###Commands
+__open_related__: When viewing a GF source file,
+`view.run_command('open_related')` opens all related files (abstract and
+concretes).
 
