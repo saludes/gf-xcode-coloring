@@ -1,4 +1,0 @@
-[
-	{"caption": "Open this", "command": "open_selected"},
-	{"caption": "Open related files", "command": "open_related"}
-]
