@@ -17,7 +17,7 @@ def get_abstract(path):
 		else:
 			for regex,k in (abstract_regex, concrete_regex):
 				m = re.match(regex, line)
-				if m: return m.group(k)
+				if m: return m.group(k) 
 
 def find_files(nameFilter, where):
 	from os.path import basename, dirname, walk
@@ -70,6 +70,7 @@ def find_related(path):
 
 class OpenSourceCommand(sublime_plugin.WindowCommand):
 	def is_enabled(self, files):
+		print "File is", files
 		return len(files)==1 and is_GF_source(files[0]) == 'gfo'
 
 	def run(self, files):
